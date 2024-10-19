@@ -12,30 +12,25 @@ const Specialities = () => {
     { name: "Orthopedic", image: "/Orthopedic.svg" },
   ];
 
-  // State to handle the visible range of items (6 items at a time)
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Handle the auto-play with a timer
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 5000); // 5-second timer for autoplay
-    return () => clearInterval(interval); // Cleanup on unmount
+    }, 2000);
+    return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // Function to handle next button click
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % specialitiesData.length);
   };
 
-  // Function to handle previous button click
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? specialitiesData.length - 1 : prevIndex - 1
     );
   };
 
-  // Get the 6 visible items based on the currentIndex
   const visibleItems = [
     ...specialitiesData.slice(currentIndex, currentIndex + 6),
     ...specialitiesData.slice(
@@ -60,7 +55,6 @@ const Specialities = () => {
         </div>
       </div>
 
-      {/* Carousel content */}
       <div className="flex items-center justify-center gap-6">
         {visibleItems.map((speciality, index) => (
           <div
@@ -72,7 +66,7 @@ const Specialities = () => {
                 src={speciality.image}
                 alt={speciality.name}
                 className="w-[2.5vw] h-[2.5vw] duration-300"
-                style={{ filter: "invert(0)" }} // Normal state
+                style={{ filter: "invert(0)" }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.filter = "invert(1)")
                 } // White on hover

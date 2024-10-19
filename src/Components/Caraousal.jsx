@@ -59,7 +59,7 @@ const Carousel = () => {
   useEffect(() => {
     const autoSlide = setInterval(() => {
       goToNext(); // Automatically go to the next card
-    }, 6000);
+    }, 2000);
 
     return () => clearInterval(autoSlide); // Clean up the interval when the component unmounts
   }, [currentIndex]);
